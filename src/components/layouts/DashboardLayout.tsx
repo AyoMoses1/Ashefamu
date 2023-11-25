@@ -11,6 +11,7 @@ import ROUTES from "../../utils/routeNames";
 import { executeGetDashboardCards } from "../../apis/user";
 import { populateDashboardCards } from "../../store/slice/dataSlice";
 import { LIGHT_BG } from "../../utils/color";
+import { useAppContext } from "../../contexts/AppContext";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -21,6 +22,8 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   const { isOpen, onClose, onOpen } = useDisclosure()
   const dispatch = useAppDispatch()
   const token = useAppSelector(state => state.accountStore.tokenStore)
+  const { handleGetFacilities } = useAppContext();
+
 
   // GET DASHBOARD CARD
   const handleGetDashboardCard = async () => {
@@ -37,6 +40,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 
   useEffect(() => {
     handleGetDashboardCard()
+    handleGetFacilities()
   }, [token])
 
 

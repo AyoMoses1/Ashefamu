@@ -16,8 +16,6 @@ const AuthGuard = ({ authRoles }: AuthGuardProps) => {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  console.log({rolesArray}, rolesArray.some(role => user.user.userRole.roleDetails.name.toLowerCase() === role))
-
   if (rolesArray.some(role => user.user.userRole.roleDetails.name.toLowerCase() === role)) {
     return <Outlet />;
   }
